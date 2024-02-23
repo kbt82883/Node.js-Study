@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>서버 연결해보기</title>
+
+    <style>
+      #img {
+      width: 30%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="animalSound"></h1>
+    <img id="img" src="" alt="" />
+    <input id="input" type="text" />
+    <button onclick="getSound()">API 요청</button>
+
+    <script>
+      async function getSound() {
+        const animalSound = document.querySelector("#animalSound");
+        const input = document.querySelector("#input").value;
+        const response = await fetch(`http://localhost:3000/sound/${input}`);
+        const jsonData = await response.json();
+        console.log(jsonData);
+        animalSound.innerHTML = jsonData.sound;
+        document.querySelector("#img").src = jsonData.img;
+      }
+    </script>
+  </body>
+</html>
